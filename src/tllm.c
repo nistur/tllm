@@ -2,27 +2,26 @@
 
 tllmReturn tllmClearContext(tllmContext* context)
 {
-    tllmReturn(SUCCESS);
+    tllmReturnCode(SUCCESS);
 }
 
 tllmReturn tllmInitContext(tllmContext** context)
 {
-    if(context == 0)
-        tllmReturn(NO_CONTEXT);
+    tllmAssert((context != 0), NO_CONTEXT);
+    
     *context = tllmMalloc(tllmContext);
     if(tllmClearContext(*context) != TLLM_SUCCESS)
 	   tllmTerminateContext(context);
-    tllmReturn(SUCCESS);
+    tllmReturnCode(SUCCESS);
 }
 
 tllmReturn tllmTerminateContext(tllmContext** context)
 {
-    if(*context == 0)
-	   tllmReturn(NO_CONTEXT);
+    tllmAssert((*context != 0), NO_CONTEXT);
 
     tllmFree(*context);
     *context = 0;
-    tllmReturn(SUCCESS);
+    tllmReturnCode(SUCCESS);
 }
 
 const char* tllmError()

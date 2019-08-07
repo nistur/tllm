@@ -24,12 +24,21 @@ struct _tllmContext
  ***************************************/
 extern tllmReturn  g_tllmError;
 extern const char* g_tllmErrors[];
-#define tllmReturn(x)				\
+#define tllmReturn()				\
+    {						\
+	return g_tllmError;			\
+    }
+#define tllmReturnCode(x)			\
     {						\
 	g_tllmError = TLLM_##x;			\
 	return TLLM_##x;			\
     }
 
-
+#define tllmAssert(CHECK,ERROR)			\
+    if( !(CHECK) )				\
+    {						\
+	g_tllmError = TLLM_##ERROR;		\
+	return TLLM_##ERROR;			\
+    }
 
 #endif/*__TLLM_INTERNAL_H__*/
