@@ -1,7 +1,7 @@
-#include "template.h"
+#include "tllm.h"
 
-tmplReturn g_tmplError;
-const char* g_tmplErrors[] = 
+tllmReturn g_tllmError;
+const char* g_tllmErrors[] = 
 {
     "Success",
     "Null context",
