@@ -30,7 +30,8 @@ extern const char* g_tllmErrors[];
     }
 #define tllmReturnCode(x)			\
     {						\
-	g_tllmError = TLLM_##x;			\
+	if(TLLM_##x != TLLM_SUCCESS)		\
+	    g_tllmError = TLLM_##x;		\
 	return TLLM_##x;			\
     }
 

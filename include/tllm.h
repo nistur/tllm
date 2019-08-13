@@ -19,16 +19,22 @@ extern "C" {
 # define TLLM_EXPORT
 #endif
 
-typedef int tllmReturn;
+typedef char             tllmInstruction;
+typedef tllmInstruction* tllmProgram;
 
 typedef struct _tllmContext tllmContext;
 
-#define TLLM_SUCCESS    0
-#define TLLM_NO_CONTEXT 1
+typedef enum
+{
+    TLLM_SUCCESS = 0,
+    TLLM_NO_CONTEXT = 1,
+    TLLM_INVALID_INSTRUCTION = 2,
+} tllmReturn;
 
-TLLM_EXPORT tllmReturn   tllmInitContext     (tllmContext** context);
-TLLM_EXPORT tllmReturn   tllmTerminateContext(tllmContext** context);
-TLLM_EXPORT const char*  tllmError();
+    TLLM_EXPORT tllmReturn   tllmInitContext     (tllmContext** context);
+    TLLM_EXPORT tllmReturn   tllmTerminateContext(tllmContext** context);
+    TLLM_EXPORT tllmReturn   tllmExecute         (tllmContext*  context, tllmProgram program);
+    TLLM_EXPORT const char*  tllmError();
 
 #ifdef __cplusplus
 }
